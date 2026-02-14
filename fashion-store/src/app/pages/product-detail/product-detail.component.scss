@@ -1,0 +1,27 @@
+.size-btn {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.section-title {
+    font-family: var(--font-secondary);
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background-color: var(--color-accent);
+    }
+}

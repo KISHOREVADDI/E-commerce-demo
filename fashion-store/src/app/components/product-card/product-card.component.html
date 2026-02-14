@@ -1,0 +1,35 @@
+<div class="product-card card h-100 position-relative" [routerLink]="['/products', product?.id]">
+    <!-- Wishlist Button -->
+    <button class="btn btn-light rounded-circle shadow-sm position-absolute top-0 end-0 m-2 p-2 lh-1 border-0"
+        style="z-index: 10; width: 35px; height: 35px; display: flex; align-items: center; justify-content: center;"
+        (click)="toggleWishlist($event)">
+        <i class="bi bi-heart"></i>
+    </button>
+
+    <div class="img-wrapper bg-light">
+        <!-- Using a placeholder or input image -->
+        <img [src]="product?.image || 'https://placehold.co/400x500/f5f5f5/333?text=Product'" class="card-img-top"
+            [alt]="product?.name">
+
+        <!-- Add to Cart Overlay (Visible on Hover) -->
+        <div
+            class="add-to-cart-overlay position-absolute bottom-0 start-0 w-100 p-2 text-center bg-white bg-opacity-75 d-none d-lg-block">
+            <button class="btn btn-primary w-100 text-uppercase fw-bold btn-sm" (click)="addToCart($event)">
+                <i class="bi bi-cart-plus me-2"></i> Add to Cart
+            </button>
+        </div>
+    </div>
+
+    <div class="card-body d-flex flex-column justify-content-between">
+        <div>
+            <div class="brand-name">{{ product?.brand || 'Brand Name' }}</div>
+            <h5 class="product-title text-truncate" [title]="product?.name">{{ product?.name || 'Stylish Product Name'
+                }}</h5>
+            <div class="product-price">
+                <span>₹{{ product?.price || '4999' }}</span>
+                <span class="original-price" *ngIf="product?.originalPrice">₹{{ product?.originalPrice }}</span>
+                <span class="discount" *ngIf="product?.discount">({{ product?.discount }}% OFF)</span>
+            </div>
+        </div>
+    </div>
+</div>

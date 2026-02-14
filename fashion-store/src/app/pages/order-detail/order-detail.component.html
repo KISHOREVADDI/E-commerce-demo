@@ -1,0 +1,123 @@
+<div class="container my-5 pt-4">
+    <div *ngIf="isLoading" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && order" class="row">
+        <!-- Order Header -->
+        <div class="col-12 mb-4">
+            <div class="d-flex justify-content-between align-items-center">
+                <h3 class="fw-bold">Order #{{order.orderNumber}}</h3>
+                <span class="badge bg-primary fs-6">{{order.status}}</span>
+            </div>
+            <p class="text-muted">Placed on {{order.createdAt | date:'medium'}}</p>
+        </div>
+
+        <!-- Order Tracking (Simple Stepper) -->
+        <div class="col-12 mb-5">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4">
+                    <h5 class="fw-bold mb-4">Order Status</h5>
+                    <div class="d-flex justify-content-between position-relative">
+                        <!-- Progress Bar Background -->
+                        <div class="position-absolute top-50 start-0 w-100 bg-light" style="height: 4px; z-index: 0;">
+                        </div>
+                        <!-- Active Progress (Dynamic width based on status) -->
+                        <div class="position-absolute top-50 start-0 bg-success" style="height: 4px; z-index: 1;"
+                            [style.width]="order.status === 'DELIVERED' ? '100%' : (order.status === 'SHIPPED' ? '50%' : '5%')">
+                        </div>
+
+                        <!-- Steps -->
+                        <div class="position-relative z-2 text-center bg-white px-2">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                                [ngClass]="{'bg-success text-white': true, 'bg-light text-muted': false}"
+                                style="width: 40px; height: 40px;">
+                                <i class="bi bi-box-seam"></i>
+                            </div>
+                            <small class="fw-bold">Placed</small>
+                        </div>
+                        <div class="position-relative z-2 text-center bg-white px-2">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                                [ngClass]="{'bg-success text-white': order.status === 'SHIPPED' || order.status === 'DELIVERED', 'bg-light text-muted': order.status !== 'SHIPPED' && order.status !== 'DELIVERED'}"
+                                style="width: 40px; height: 40px;">
+                                <i class="bi bi-truck"></i>
+                            </div>
+                            <small class="fw-bold">Shipped</small>
+                        </div>
+                        <div class="position-relative z-2 text-center bg-white px-2">
+                            <div class="rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                                [ngClass]="{'bg-success text-white': order.status === 'DELIVERED', 'bg-light text-muted': order.status !== 'DELIVERED'}"
+                                style="width: 40px; height: 40px;">
+                                <i class="bi bi-check-lg"></i>
+                            </div>
+                            <small class="fw-bold">Delivered</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Order Details Columns -->
+        <div class="col-lg-8">
+            <!-- Items -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 fw-bold">Items</h5>
+                </div>
+                <div class="card-body">
+                    <div *ngFor="let item of order.items" class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                        <img [src]="item.product.image || 'https://placehold.co/100'" class="rounded me-3"
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                        <div>
+                            <h6 class="mb-1">{{item.product.name}}</h6>
+                            <p class="text-muted small mb-0">{{item.product.brand}} | Size: {{item.product.size ||
+                                'N/A'}}</p>
+                            <p class="text-muted small mb-0">Qty: {{item.quantity}}</p>
+                        </div>
+                        <div class="ms-auto fw-bold">₹{{item.price}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <!-- Shipping Info -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 fw-bold">Shipping Address</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-0">
+                        {{order.shippingAddress || 'No address provided'}}
+                    </p>
+                </div>
+            </div>
+
+            <!-- Payment Info -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-white py-3">
+                    <h5 class="mb-0 fw-bold">Payment Details</h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Method:</span>
+                        <span class="fw-bold text-uppercase">{{order.paymentMethod}}</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span class="text-muted">Status:</span>
+                        <span class="badge"
+                            [ngClass]="{'bg-success': order.paymentStatus === 'PAID', 'bg-warning text-dark': order.paymentStatus === 'PENDING'}">{{order.paymentStatus}}</span>
+                    </div>
+                    <div class="border-top pt-3 mt-3">
+                        <div class="d-flex justify-content-between fw-bold fs-5">
+                            <span>Total</span>
+                            <span>₹{{order.totalAmount}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

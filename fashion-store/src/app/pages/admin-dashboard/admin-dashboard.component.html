@@ -1,0 +1,84 @@
+<div class="container mt-5">
+    <h2 class="mb-4">Admin Dashboard</h2>
+
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">Add New Product</div>
+        <div class="card-body">
+            <form (ngSubmit)="addProduct()">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label>Name</label>
+                        <input type="text" class="form-control" [(ngModel)]="newProduct.name" name="name" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label>Brand</label>
+                        <input type="text" class="form-control" [(ngModel)]="newProduct.brand" name="brand" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label>Price</label>
+                        <input type="number" class="form-control" [(ngModel)]="newProduct.price" name="price" required>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Original Price</label>
+                        <input type="number" class="form-control" [(ngModel)]="newProduct.originalPrice"
+                            name="originalPrice">
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label>Discount (%)</label>
+                        <input type="number" class="form-control" [(ngModel)]="newProduct.discount" name="discount">
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label>Category</label>
+                    <select class="form-select" [(ngModel)]="newProduct.category" name="category" required>
+                        <option value="Men">Men</option>
+                        <option value="Women">Women</option>
+                        <option value="Kids">Kids</option>
+                        <option value="Shoes">Shoes</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label>Product Images (Max 5)</label>
+                    <input type="file" class="form-control" (change)="onFileSelected($event)" multiple accept="image/*">
+                    <div *ngIf="imagePreviews.length > 0" class="mt-2 d-flex gap-2">
+                        <img *ngFor="let preview of imagePreviews" [src]="preview" class="img-thumbnail"
+                            style="width: 80px; height: 80px; object-fit: cover;">
+                    </div>
+                    <div *ngIf="uploadError" class="text-danger mt-1 small">{{uploadError}}</div>
+                </div>
+                <div class="mb-3">
+                    <label>Description</label>
+                    <textarea class="form-control" [(ngModel)]="newProduct.description" name="description"
+                        rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Product</button>
+            </form>
+        </div>
+    </div>
+
+    <h3 class="mt-5">Existing Products</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Price</th>
+                <th>Category</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of products">
+                <td>{{product.id}}</td>
+                <td><img [src]="product.image" width="50"></td>
+                <td>{{product.name}}</td>
+                <td>{{product.brand}}</td>
+                <td>${{product.price}}</td>
+                <td>{{product.category}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

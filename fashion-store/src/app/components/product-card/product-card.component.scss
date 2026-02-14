@@ -1,0 +1,17 @@
+/* Inherits from global styles.scss but adding specific overrides if needed */
+.product-card {
+    cursor: pointer;
+    overflow: hidden;
+    /* Ensure image and overlays stay inside */
+
+    .add-to-cart-overlay {
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+    }
+
+    &:hover {
+        .add-to-cart-overlay {
+            transform: translateY(0);
+        }
+    }
+}

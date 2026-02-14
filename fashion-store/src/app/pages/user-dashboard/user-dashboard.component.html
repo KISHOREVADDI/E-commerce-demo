@@ -1,0 +1,68 @@
+<div class="container my-5 pt-4">
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                            style="width: 100px; height: 100px;">
+                            <i class="bi bi-person fs-1 text-muted"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-1">User</h5>
+                    <div class="list-group list-group-flush small text-uppercase fw-bold mt-3">
+                        <a routerLink="/profile" class="list-group-item list-group-item-action py-3 border-0">Profile
+                            Info</a>
+                        <a routerLink="/user" class="list-group-item list-group-item-action py-3 border-0 active">My
+                            Orders</a>
+                        <a routerLink="/addresses" class="list-group-item list-group-item-action py-3 border-0">Saved
+                            Addresses</a>
+                        <a routerLink="/wishlist"
+                            class="list-group-item list-group-item-action py-3 border-0">Wishlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <h3 class="mb-4">My Orders</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div *ngIf="orders.length === 0" class="text-center py-4">
+                        <p class="text-muted">No orders found.</p>
+                        <a routerLink="/products" class="btn btn-primary">Start Shopping</a>
+                    </div>
+
+                    <div *ngFor="let order of orders" class="border-bottom mb-4 pb-4">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <div>
+                                <h6 class="mb-0 fw-bold">Order #{{order.orderNumber}}</h6>
+                                <small class="text-muted">Placed on {{order.createdAt | date:'mediumDate'}}</small>
+                            </div>
+                            <span class="badge" [ngClass]="{
+                                'bg-warning text-dark': order.status === 'PENDING' || order.status === 'Placed',
+                                'bg-primary': order.status === 'SHIPPED',
+                                'bg-success': order.status === 'DELIVERED'
+                            }">{{order.status}}</span>
+                        </div>
+
+                        <div *ngFor="let item of order.items" class="d-flex align-items-center mb-2">
+                            <img [src]="item.product.image || 'https://placehold.co/100'" alt="Product"
+                                class="rounded me-3" style="width: 50px; height: 50px; object-fit: cover;">
+                            <div class="flex-grow-1">
+                                <h6 class="mb-0 small">{{item.product.name}}</h6>
+                                <small class="text-muted">Qty: {{item.quantity}}</small>
+                            </div>
+                            <div class="fw-bold small">₹{{item.price}}</div>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3 pt-2 border-top">
+                            <span class="fw-bold">Total: ₹{{order.totalAmount}}</span>
+                            <a [routerLink]="['/orders', order.id]" class="btn btn-outline-primary btn-sm">View
+                                Details</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

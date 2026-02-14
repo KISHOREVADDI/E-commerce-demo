@@ -1,0 +1,32 @@
+.filter-sidebar {
+    position: sticky;
+    top: 100px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.color-swatch {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+
+.pagination {
+    .page-link {
+        color: var(--color-primary);
+        font-weight: 500;
+        margin: 0 5px;
+        border-radius: 4px;
+
+        &.active,
+        &:hover {
+            background-color: var(--color-primary);
+            color: #fff;
+        }
+    }
+}

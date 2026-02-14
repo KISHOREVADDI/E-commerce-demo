@@ -1,0 +1,104 @@
+<div class="container my-5 pt-4">
+    <div class="row gx-5">
+        <!-- Image Gallery -->
+        <div class="col-lg-7 mb-5 mb-lg-0">
+            <div class="row g-2">
+                <!-- Thumbnails (Only show if there are multiple images) -->
+                <div class="col-2" *ngIf="product?.images?.length">
+                    <div class="d-flex flex-column gap-2">
+                        <!-- Main Image thumbnail -->
+                        <img [src]="product?.image" class="img-fluid cursor-pointer border"
+                            [class.border-dark]="selectedImage === product?.image"
+                            [class.opacity-100]="selectedImage === product?.image"
+                            [class.opacity-50]="selectedImage !== product?.image" (click)="changeImage(product?.image)"
+                            alt="Thumbnail">
+
+                        <!-- Additional Images -->
+                        <img *ngFor="let img of product.images" [src]="img" class="img-fluid cursor-pointer border"
+                            [class.border-dark]="selectedImage === img" [class.opacity-100]="selectedImage === img"
+                            [class.opacity-50]="selectedImage !== img" (click)="changeImage(img)" alt="Thumbnail">
+                    </div>
+                </div>
+
+                <!-- Main Image Area with Navigation -->
+                <div [class.col-10]="product?.images?.length" [class.col-12]="!product?.images?.length"
+                    class="position-relative">
+                    <img [src]="selectedImage || product?.image || 'https://placehold.co/600x600/f5f5f5/333?text=Product'"
+                        class="img-fluid w-100" [alt]="product?.name">
+
+                    <!-- Navigation Arrows (only show if multiple images) -->
+                    <div *ngIf="allImages.length > 1">
+                        <button
+                            class="btn btn-dark position-absolute top-50 start-0 translate-middle-y ms-2 rounded-circle p-2"
+                            (click)="previousImage()" style="opacity: 0.7; width: 40px; height: 40px;">
+                            <i class="bi bi-chevron-left"></i>
+                        </button>
+                        <button
+                            class="btn btn-dark position-absolute top-50 end-0 translate-middle-y me-2 rounded-circle p-2"
+                            (click)="nextImage()" style="opacity: 0.7; width: 40px; height: 40px;">
+                            <i class="bi bi-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="col-lg-5">
+            <h2 class="fw-bold mb-2">{{product?.name}}</h2>
+            <p class="text-muted fw-bold mb-4">{{product?.brand}}</p>
+
+            <div class="d-flex align-items-center mb-4">
+                <h3 class="mb-0 me-3">₹{{product?.price}}</h3>
+                <span class="text-muted text-decoration-line-through me-3"
+                    *ngIf="product?.originalPrice">₹{{product?.originalPrice}}</span>
+                <span class="text-danger fw-bold" *ngIf="product?.discount">{{product?.discount}}% OFF</span>
+            </div>
+
+            <p class="text-muted mb-4">
+                {{product?.description || 'No description available for this product.'}}
+            </p>
+
+            <!-- Size Selector -->
+            <div class="mb-4" *ngIf="product?.sizes?.length">
+                <h6 class="text-uppercase fw-bold text-small mb-3">Select Size</h6>
+                <div class="d-flex gap-2">
+                    <button class="btn rounded-circle size-btn" *ngFor="let size of product.sizes"
+                        [class.btn-dark]="selectedSize === size" [class.btn-outline-dark]="selectedSize !== size"
+                        (click)="selectSize(size)">
+                        {{size}}
+                    </button>
+                </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="d-flex gap-3 mb-5">
+                <button class="btn btn-primary btn-lg flex-grow-1 text-uppercase fw-bold py-3" (click)="addToCart()"><i
+                        class="bi bi-cart-plus me-2"></i> Add to Cart</button>
+                <button class="btn btn-outline-secondary btn-lg py-3 px-4" (click)="addToWishlist()"><i
+                        class="bi bi-heart"></i></button>
+            </div>
+
+            <div class="border-top pt-4">
+                <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-truck me-3 fs-5"></i>
+                    <span>Free delivery on orders over ₹500</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <i class="bi bi-arrow-return-left me-3 fs-5"></i>
+                    <span>30 days return policy</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Similar Products -->
+    <div class="mt-5 pt-5 pb-5">
+        <h3 class="section-title position-relative d-inline-block pb-3 mb-5">Similar Products</h3>
+        <div class="row g-4">
+            <div class="col-6 col-md-3" *ngFor="let product of similarProducts">
+                <app-product-card [product]="product"></app-product-card>
+            </div>
+        </div>
+    </div>
+</div>

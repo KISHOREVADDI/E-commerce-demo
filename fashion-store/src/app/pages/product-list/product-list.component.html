@@ -1,0 +1,101 @@
+<div class="container my-5 pt-4">
+    <div class="row">
+        <!-- Sidebar Filters -->
+        <div class="col-lg-3 mb-4">
+            <div class="filter-sidebar p-3 border rounded-0 bg-white">
+                <h5 class="mb-4 fw-bold">Filters</h5>
+
+                <!-- Categories -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted small mb-3">Categories</h6>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="catMen" [checked]="selectedCategories.Men"
+                            (change)="toggleCategory('Men')">
+                        <label class="form-check-label" for="catMen">Men</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="catWomen"
+                            [checked]="selectedCategories.Women" (change)="toggleCategory('Women')">
+                        <label class="form-check-label" for="catWomen">Women</label>
+                    </div>
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="checkbox" id="catKids" [checked]="selectedCategories.Kids"
+                            (change)="toggleCategory('Kids')">
+                        <label class="form-check-label" for="catKids">Kids</label>
+                    </div>
+                </div>
+
+                <!-- Price -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted small mb-3">Price</h6>
+                    <input type="range" class="form-range" min="0" max="10000" step="100" [value]="priceRange"
+                        (input)="setPriceRange($event)">
+                    <div class="d-flex justify-content-between small text-muted">
+                        <span>₹0</span>
+                        <span>₹{{priceRange}}+</span>
+                    </div>
+                </div>
+
+                <!-- Color -->
+                <div class="mb-4">
+                    <h6 class="text-uppercase fw-bold text-muted small mb-3">Color</h6>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <div class="color-swatch bg-dark" [class.border-primary]="selectedColor === 'Black'"
+                            [class.border-2]="selectedColor === 'Black'" (click)="setColor('Black')" title="Black"
+                            style="cursor: pointer;"></div>
+                        <div class="color-swatch bg-white border" [class.border-primary]="selectedColor === 'White'"
+                            [class.border-2]="selectedColor === 'White'" (click)="setColor('White')" title="White"
+                            style="cursor: pointer;"></div>
+                        <div class="color-swatch bg-primary" [class.border-primary]="selectedColor === 'Blue'"
+                            [class.border-2]="selectedColor === 'Blue'" (click)="setColor('Blue')" title="Blue"
+                            style="cursor: pointer;"></div>
+                        <div class="color-swatch bg-danger" [class.border-primary]="selectedColor === 'Red'"
+                            [class.border-2]="selectedColor === 'Red'" (click)="setColor('Red')" title="Red"
+                            style="cursor: pointer;"></div>
+                        <div class="color-swatch bg-success" [class.border-primary]="selectedColor === 'Green'"
+                            [class.border-2]="selectedColor === 'Green'" (click)="setColor('Green')" title="Green"
+                            style="cursor: pointer;"></div>
+                        <div class="color-swatch" style="background-color: #f5f5dc; cursor: pointer;"
+                            [class.border-primary]="selectedColor === 'Beige'"
+                            [class.border-2]="selectedColor === 'Beige'" (click)="setColor('Beige')" title="Beige">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div class="col-lg-9">
+            <!-- Top Bar -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="mb-0 text-muted">Showing <strong>{{products.length}}</strong> results</p>
+                <div class="d-flex align-items-center">
+                    <span class="me-2 text-muted small">Sort by:</span>
+                    <select class="form-select form-select-sm border-0 bg-light" style="width: auto;">
+                        <option>Recommended</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest First</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-6 col-md-4" *ngFor="let product of products">
+                    <app-product-card [product]="product"></app-product-card>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Page navigation" class="mt-5 d-flex justify-content-center">
+                <ul class="pagination">
+                    <li class="page-item disabled"><a class="page-link border-0" href="#">Previous</a></li>
+                    <li class="page-item active"><a class="page-link border-0" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link border-0" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link border-0" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link border-0" href="#">Next</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

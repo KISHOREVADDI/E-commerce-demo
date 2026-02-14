@@ -1,0 +1,36 @@
+<div class="container my-5 pt-5 pb-5">
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-lg">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <h2 class="fw-bold mb-2 text-dark">Admin Portal</h2>
+                        <p class="text-muted small">Authorized Personnel Only</p>
+                    </div>
+
+                    <div *ngIf="errorMsg" class="alert alert-danger small py-2">{{errorMsg}}</div>
+
+                    <form (ngSubmit)="onLogin()">
+                        <div class="mb-3">
+                            <label class="form-label text-uppercase small fw-bold text-muted">Email</label>
+                            <input type="email" class="form-control py-2" [(ngModel)]="loginData.email" name="email"
+                                placeholder="admin@fashnix.com" required>
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label text-uppercase small fw-bold text-muted">Password</label>
+                            <input type="password" class="form-control py-2" [(ngModel)]="loginData.password"
+                                name="password" placeholder="********" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100 py-2 text-uppercase fw-bold mb-3">Login as
+                            Admin</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <a routerLink="/login" class="text-decoration-none small text-muted">Back to User Login</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+/* Global Styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;600;700&display=swap');
+
+:root {
+  --font-primary: 'Montserrat', sans-serif;
+  --font-secondary: 'Playfair Display', serif;
+  
+  --color-primary: #1a1a1a;
+  --color-secondary: #f8f9fa;
+  --color-accent: #c9a55c; /* Gold/Beige accent */
+  --color-text: #333333;
+  --color-text-muted: #666666;
+  --color-border: #e9ecef;
+}
+
+body {
+  font-family: var(--font-primary);
+  color: var(--color-text);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+  
+  &:hover {
+    color: var(--color-accent);
+  }
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: #fff;
+  padding: 10px 25px;
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: #fff;
+  }
+}
+
+.btn-outline-primary {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+
+  &:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+  }
+}
+
+/* Card Styling */
+.product-card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    
+    .card-img-top {
+      transform: scale(1.05);
+    }
+  }
+
+  .img-wrapper {
+    overflow: hidden;
+    position: relative;
+    padding-top: 133%; /* 3:4 Aspect Ratio */
+    background-color: #f0f0f0;
+    
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+  }
+
+  .card-body {
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .brand-name {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.25rem;
+  }
+
+  .product-title {
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .product-price {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    
+    .original-price {
+      text-decoration: line-through;
+      color: var(--color-text-muted);
+      font-size: 0.85rem;
+      margin-left: 5px;
+      font-weight: 400;
+    }
+    
+    .discount {
+      color: #d9534f;
+      font-size: 0.85rem;
+      margin-left: 5px;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+<div class="container my-5 pt-4">
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body text-center p-4">
+                    <div class="mb-3">
+                        <div class="bg-light rounded-circle d-flex align-items-center justify-content-center mx-auto"
+                            style="width: 100px; height: 100px;">
+                            <i class="bi bi-person fs-1 text-muted"></i>
+                        </div>
+                    </div>
+                    <h5 class="fw-bold mb-1">User</h5>
+                    <div class="list-group list-group-flush small text-uppercase fw-bold mt-3">
+                        <a routerLink="/profile" class="list-group-item list-group-item-action py-3 border-0">Profile
+                            Info</a>
+                        <a routerLink="/user" class="list-group-item list-group-item-action py-3 border-0">My Orders</a>
+                        <a routerLink="/addresses"
+                            class="list-group-item list-group-item-action py-3 border-0 active">Saved Addresses</a>
+                        <a routerLink="/wishlist"
+                            class="list-group-item list-group-item-action py-3 border-0">Wishlist</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <h3 class="mb-4">Saved Addresses</h3>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Default Address</h5>
+                    <p class="card-text">123 Fashion St, Design City, 56789</p>
+                    <button class="btn btn-sm btn-outline-primary">Edit</button>
+                    <button class="btn btn-sm btn-outline-danger ms-2">Delete</button>
+                </div>
+            </div>
+            <button class="btn btn-primary">+ Add New Address</button>
+        </div>
+    </div>
+</div>
