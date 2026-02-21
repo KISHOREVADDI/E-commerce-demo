@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: fashion-store
+    env: static
+    buildCommand: npm install && npm run build
+    staticPublishPath: ./dist/fashion-store
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
